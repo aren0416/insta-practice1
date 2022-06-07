@@ -3,6 +3,6 @@
 - [x] router 설정
 - [x] globalstyle
 - [x] page title
-- [ ] login
+- [x] login
 - [ ] home
 - [ ] signup
