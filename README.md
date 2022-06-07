@@ -1,6 +1,7 @@
 # 해야할일
 
-- [ ] router 설정
+- [x] router 설정
+- [ ] globalstyle
 - [ ] page title
 - [ ] home
 - [ ] login
