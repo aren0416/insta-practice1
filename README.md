@@ -1,8 +1,8 @@
 # 해야할일
 
 - [x] router 설정
-- [ ] globalstyle
-- [ ] page title
-- [ ] home
+- [x] globalstyle
+- [x] page title
 - [ ] login
+- [ ] home
 - [ ] signup
