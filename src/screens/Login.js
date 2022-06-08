@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { AuthLayout } from "../components/auth/AuthLayout";
 import { AuthTitle } from "../components/auth/AuthTitle";
 import { BottomBox } from "../components/auth/BottomBox";
