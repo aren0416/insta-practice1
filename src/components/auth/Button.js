@@ -8,8 +8,9 @@ const SButton = styled.button`
   margin-top: 20px;
   cursor: pointer;
   color: white;
+  opacity: ${(props) => props.opacity};
 `;
 
-export const Button = ({ text }) => {
-  return <SButton>{text}</SButton>;
+export const Button = ({ text, opacity }) => {
+  return <SButton opacity={opacity}>{text}</SButton>;
 };
