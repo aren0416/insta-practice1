@@ -22,7 +22,10 @@ function App() {
               path={routes.home}
               element={isLoggedIn ? <Home /> : <Login />}
             />
-            <Route path={routes.signUp} element={<SignUp />} />
+            <Route
+              path={routes.signUp}
+              element={!isLoggedIn ? <SignUp /> : null}
+            />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </Router>
