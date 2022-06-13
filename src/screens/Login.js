@@ -14,13 +14,16 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm({
+    mode: "onChange",
+  });
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
   console.log(errors);
+  console.log(isValid);
 
   return (
     <>
@@ -54,7 +57,7 @@ export const Login = () => {
           />
           <FormError message={errors?.password?.message} />
 
-          <Button text="로그인" />
+          <Button opacity={isValid ? "1" : "0.5"} text="로그인" />
         </FormBox>
         <BottomBox
           cta="아이디가 없으세요?"
