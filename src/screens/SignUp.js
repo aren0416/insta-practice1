@@ -10,6 +10,27 @@ import { Input } from "../components/auth/Input";
 import { PageTitle } from "../components/PageTitle";
 import { routes } from "../routes";
 
+const CREATE_ACCOUNT_MUTAION = gql`
+  mutation createAccount(
+    $firstName: String!
+    $lastName: String
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    createAccount(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
 export const SignUp = () => {
   const {
     register,
@@ -17,6 +38,8 @@ export const SignUp = () => {
     getValues,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
+
+  const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTAION);
 
   const onSubmit = () => {
     console.log(getValues());
@@ -75,6 +98,18 @@ export const SignUp = () => {
             placeholder="비밀번호"
           />
           <FormError message={errors?.password?.message} />
+
+          <Input
+            {...register("re_password", {
+              required: "비밀번호 확인은 필수에요",
+              minLength: {
+                value: 8,
+                message: "비밀번호는 8자리 이상 적어주세요",
+              },
+            })}
+            type="password"
+            placeholder="비밀번호 확인"
+          />
 
           <Button opacity={isValid ? "1" : "0.5"} text="회원가입" />
         </FormBox>
