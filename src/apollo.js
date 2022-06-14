@@ -9,6 +9,11 @@ export const loginUser = (token) => {
   isLoggedInVar(true);
 };
 
+export const logoutUser = () => {
+  localStorage.removeItem(TOKEN);
+  isLoggedInVar(false);
+};
+
 export const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
