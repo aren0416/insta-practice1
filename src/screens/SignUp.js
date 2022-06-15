@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { AuthLayout } from "../components/auth/AuthLayout";
 import { AuthTitle } from "../components/auth/AuthTitle";
 import { BottomBox } from "../components/auth/BottomBox";
@@ -32,17 +33,36 @@ const CREATE_ACCOUNT_MUTAION = gql`
 `;
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTAION);
+  const onCompleted = (data) => {
+    console.log(data);
+    const {
+      createAccount: { ok, error },
+    } = data;
+    if (!ok) {
+      return;
+    }
+    navigate(routes.home);
+  };
 
-  const onSubmit = () => {
-    console.log(getValues());
+  const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTAION, {
+    onCompleted,
+  });
+
+  const onSubmit = (data) => {
+    if (loading) {
+      return;
+    }
+    createAccount({
+      variables: { ...data },
+    });
   };
 
   console.log(errors);
@@ -110,6 +130,7 @@ export const SignUp = () => {
             type="password"
             placeholder="비밀번호 확인"
           />
+          <FormError message={errors?.re_password?.message} />
 
           <Button opacity={isValid ? "1" : "0.5"} text="회원가입" />
         </FormBox>
